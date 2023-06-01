@@ -6,9 +6,12 @@
   "author": "Gabriel Taborda Farias <gabrielfariasbass@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "build": "rm -fr build && tsc -p tsconfig.build.json",
-    "dev": "ts-node src/index.ts --transpileOnly"
+    "dev": "ts-node src/index.ts --transpileOnly",
+    "eslint": "eslint -c ./.eslintrc.json --ignore-path .eslintignore --ext js,.ts ./src/*",
+    "prettier": "prettier --check --ignore-path .prettierignore \"**/*.+(js|ts|json)\"",
+    "build-test": "tsc -p tsconfig.build.json || rm -fr build"
   },
   "devDependencies": {
     "@types/jest": "29.5.2",
