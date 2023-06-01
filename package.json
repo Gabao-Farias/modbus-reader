@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:Gabao-Farias/modbus-reader.git",
   "author": "Gabriel Taborda Farias <gabrielfariasbass@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "5.0.4"
+  }
 }
