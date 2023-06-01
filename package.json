@@ -1,0 +1,8 @@
+{
+  "name": "modbus-reader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Gabao-Farias/modbus-reader.git",
+  "author": "Gabriel Taborda Farias <gabrielfariasbass@gmail.com>",
+  "license": "MIT"
+}
