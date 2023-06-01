@@ -6,7 +6,7 @@
   "author": "Gabriel Taborda Farias <gabrielfariasbass@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "build": "rm -fr build && tsc -p tsconfig.build.json",
     "dev": "ts-node src/index.ts --transpileOnly",
     "eslint": "eslint -c ./.eslintrc.json --ignore-path .eslintignore --ext js,.ts ./src/*",
