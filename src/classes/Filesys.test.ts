@@ -22,4 +22,27 @@ describe("Filesys class test suite", () => {
 
     cp.exec(`rm -fr ${filePath}`);
   });
+
+  test("[appendObjectOnJSONFile] 2. When the file exists and it's content is a filled array", async () => {
+    const filePath = `.test.filled.json`;
+    const contentAlreadyOnFile: unknown[] = [{ fill: "red" }];
+
+    const fs = new Filesys.default();
+
+    await fs.writeObjectOnJSONFile(contentAlreadyOnFile, filePath);
+
+    const dataToBeSaved = { fill: "green" };
+
+    contentAlreadyOnFile.push(dataToBeSaved);
+
+    const expectedFinalJSONSaved = contentAlreadyOnFile;
+
+    await fs.appendObjectOnJSONFile(dataToBeSaved, filePath);
+
+    const finalJSONSaved = await fs.fetchObjectOnJSONFile<unknown[]>(filePath);
+
+    expect(finalJSONSaved).toEqual(expectedFinalJSONSaved);
+
+    cp.exec(`rm -fr ${filePath}`);
+  });
 });
