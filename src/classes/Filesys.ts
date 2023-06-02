@@ -24,4 +24,27 @@ export default class Filesys {
       });
     });
   }
+
+  /**
+   * Writes data in a JSON file.
+   * @param path
+   * @returns
+   */
+  writeObjectOnJSONFile(data: unknown, path: string): Promise<void> {
+    return new Promise((resolve) => {
+      const serializedData = JSON.stringify(data);
+
+      fs.writeFile(path, serializedData, (err) => {
+        if (err) {
+          console.contextLog("Error during write file");
+
+          throw err;
+        }
+
+        console.contextLog(`JSON written successfully in '${path}'`);
+
+        resolve();
+      });
+    });
+  }
 }
