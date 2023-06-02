@@ -47,4 +47,20 @@ export default class Filesys {
       });
     });
   }
+
+  /**
+   * Appends data in a JSON file.
+   * @param path
+   * @returns
+   */
+  async appendObjectOnJSONFile(data: unknown, path: string): Promise<void> {
+    const fileData = await this.fetchObjectOnJSONFile<unknown[]>(path);
+
+    if (!Array.isArray(fileData))
+      throw new Error("Error during append data to file");
+
+    fileData.push(data);
+
+    this.writeObjectOnJSONFile(fileData, path);
+  }
 }
