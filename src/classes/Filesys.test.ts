@@ -45,4 +45,29 @@ describe("Filesys class test suite", () => {
 
     cp.exec(`rm -fr ${filePath}`);
   });
+
+  test("[fileExists] 1. When the file does not exists, or occurs any problem during the check, it should return false", async () => {
+    const filePath = `.test.unexistent.json`;
+
+    const fs = new Filesys.default();
+
+    const fileExists = fs.fileExists(filePath);
+
+    expect(fileExists).toBe(false);
+  });
+
+  test("[fileExists] 2. When the file exists it should return true", async () => {
+    const filePath = `.test.existent.json`;
+    const contentAlreadyOnFile: unknown = null;
+
+    const fs = new Filesys.default();
+
+    await fs.writeObjectOnJSONFile(contentAlreadyOnFile, filePath);
+
+    const fileExists = fs.fileExists(filePath);
+
+    expect(fileExists).toBe(true);
+
+    cp.exec(`rm -fr ${filePath}`);
+  });
 });
