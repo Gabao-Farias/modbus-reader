@@ -63,4 +63,17 @@ export default class Filesys {
 
     this.writeObjectOnJSONFile(fileData, path);
   }
+
+  /**
+   * Checks if the file of the given path exists.
+   * @param path
+   * @returns
+   */
+  fileExists(path: string): boolean {
+    try {
+      return fs.existsSync(path);
+    } catch (error) {
+      return false;
+    }
+  }
 }
