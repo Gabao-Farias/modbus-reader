@@ -9,7 +9,7 @@ export default class Filesys {
    * @param path
    * @returns
    */
-  fetchObjectOnJSONFile<T = unknown>(path: string): Promise<T | void> {
+  fetchObjectOnJSONFile<T = unknown>(path: string): Promise<T> {
     return new Promise((resolve) => {
       fs.readFile(path, "utf8", (err, data) => {
         if (err) {
