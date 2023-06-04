@@ -4,7 +4,7 @@ const Filesys = jest.requireActual<typeof FilesysClass>("./Filesys");
 
 describe("Filesys class test suite", () => {
   test("[appendObjectOnJSONFile] 1. When the given file path exists and it's content is an empty array, it should append normally, containing only the data requested to be appended", async () => {
-    const filePath = `.test.empty.json`;
+    const filePath = `.appendObjectOnJSONFile1.json`;
     const contentAlreadyOnFile: unknown[] = [];
 
     const fs = new Filesys.default();
@@ -25,7 +25,7 @@ describe("Filesys class test suite", () => {
   });
 
   test("[appendObjectOnJSONFile] 2. When the file exists and it's content is a filled array, it should append normally, containing the data requested to be appended at the last position of the array", async () => {
-    const filePath = `.test.filled.json`;
+    const filePath = `.appendObjectOnJSONFile2.json`;
     const contentAlreadyOnFile: unknown[] = [{ fill: "red" }];
 
     const fs = new Filesys.default();
@@ -49,7 +49,7 @@ describe("Filesys class test suite", () => {
   });
 
   test("[appendObjectOnJSONFile] 3. When the file exists and it's content is not an array, it should throw an error", async () => {
-    const filePath = `.test.noArray.json`;
+    const filePath = `.appendObjectOnJSONFile3.json`;
     const contentAlreadyOnFile: unknown = { fill: "red" };
 
     const fs = new Filesys.default();
@@ -66,7 +66,7 @@ describe("Filesys class test suite", () => {
   });
 
   test("[appendObjectOnJSONFile] 4. When the file does not exists, it should create a new file containing only the data requested to be appended in an array", async () => {
-    const filePath = `.test.brandNew.json`;
+    const filePath = `.appendObjectOnJSONFile4.json`;
 
     const fs = new Filesys.default();
 
@@ -84,7 +84,7 @@ describe("Filesys class test suite", () => {
   });
 
   test("[fileExists] 1. When the file does not exists, or occurs any problem during the check, it should return false", async () => {
-    const filePath = `.test.unexistent.json`;
+    const filePath = `.fileExists1.json`;
 
     const fs = new Filesys.default();
 
@@ -94,7 +94,7 @@ describe("Filesys class test suite", () => {
   });
 
   test("[fileExists] 2. When the file exists it should return true", async () => {
-    const filePath = `.test.existent.json`;
+    const filePath = `.fileExists2.json`;
     const contentAlreadyOnFile: unknown = null;
 
     const fs = new Filesys.default();
