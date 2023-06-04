@@ -46,6 +46,23 @@ describe("Filesys class test suite", () => {
     cp.exec(`rm -fr ${filePath}`);
   });
 
+  test("[appendObjectOnJSONFile] 3. When the file exists and it's content is not an array", async () => {
+    const filePath = `.test.noArray.json`;
+    const contentAlreadyOnFile: unknown = { fill: "red" };
+
+    const fs = new Filesys.default();
+
+    await fs.writeObjectOnJSONFile(contentAlreadyOnFile, filePath);
+
+    const dataToBeSaved = { fill: "green" };
+
+    await expect(
+      async () => await fs.appendObjectOnJSONFile(dataToBeSaved, filePath)
+    ).rejects.toThrow();
+
+    cp.exec(`rm -fr ${filePath}`);
+  });
+
   test("[fileExists] 1. When the file does not exists, or occurs any problem during the check, it should return false", async () => {
     const filePath = `.test.unexistent.json`;
 
