@@ -58,7 +58,10 @@ export default class Filesys {
    * @returns
    */
   async appendObjectOnJSONFile(data: unknown, path: string): Promise<void> {
-    const fileData = await this.fetchObjectOnJSONFile<unknown[]>(path);
+    let fileData: unknown[] = [];
+
+    if (this.fileExists(path))
+      fileData = await this.fetchObjectOnJSONFile<unknown[]>(path);
 
     if (!Array.isArray(fileData))
       throw new Error("Error during append data to file");
