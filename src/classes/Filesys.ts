@@ -11,6 +11,8 @@ export default class Filesys {
    */
   fetchObjectOnJSONFile<T = unknown>(path: string): Promise<T> {
     return new Promise((resolve, reject) => {
+      console.contextLog(`Fetching JSON in '${path}'...`);
+
       fs.readFile(path, "utf8", (err, data) => {
         if (err) {
           console.contextLog(`Error during read file '${path}'`);
@@ -21,6 +23,8 @@ export default class Filesys {
         }
 
         const obj = JSON.parse(data);
+
+        console.contextLog(`JSON fetched successfully in '${path}'...`);
 
         resolve(obj as T);
       });
@@ -34,11 +38,13 @@ export default class Filesys {
    */
   writeObjectOnJSONFile(data: unknown, path: string): Promise<void> {
     return new Promise((resolve, reject) => {
+      console.contextLog(`Writing JSON in '${path}'...`);
+
       const serializedData = JSON.stringify(data);
 
       fs.writeFile(path, serializedData, (err) => {
         if (err) {
-          console.contextLog("Error during write file");
+          console.contextLog(`Error during write file '${path}'`);
 
           reject(err);
 
@@ -58,6 +64,8 @@ export default class Filesys {
    * @returns
    */
   async appendObjectOnJSONFile(data: unknown, path: string): Promise<void> {
+    console.contextLog(`Appending JSON in '${path}'...`);
+
     let fileData: unknown[] = [];
 
     if (this.fileExists(path))
@@ -69,6 +77,8 @@ export default class Filesys {
     fileData.push(data);
 
     await this.writeObjectOnJSONFile(fileData, path);
+
+    console.contextLog(`JSON appended successfully in '${path}'`);
   }
 
   /**
