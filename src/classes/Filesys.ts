@@ -10,10 +10,12 @@ export default class Filesys {
    * @returns
    */
   fetchObjectOnJSONFile<T = unknown>(path: string): Promise<T> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       fs.readFile(path, "utf8", (err, data) => {
         if (err) {
           console.contextLog(`Error during read file '${path}'`);
+
+          reject(err);
 
           throw err;
         }
@@ -31,12 +33,14 @@ export default class Filesys {
    * @returns
    */
   writeObjectOnJSONFile(data: unknown, path: string): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const serializedData = JSON.stringify(data);
 
       fs.writeFile(path, serializedData, (err) => {
         if (err) {
           console.contextLog("Error during write file");
+
+          reject(err);
 
           throw err;
         }
@@ -61,7 +65,7 @@ export default class Filesys {
 
     fileData.push(data);
 
-    this.writeObjectOnJSONFile(fileData, path);
+    await this.writeObjectOnJSONFile(fileData, path);
   }
 
   /**
