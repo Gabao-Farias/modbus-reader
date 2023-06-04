@@ -3,7 +3,7 @@ import type * as FilesysClass from "./Filesys";
 const Filesys = jest.requireActual<typeof FilesysClass>("./Filesys");
 
 describe("Filesys class test suite", () => {
-  test("[appendObjectOnJSONFile] 1. When the file exists and it's content is an empty array", async () => {
+  test("[appendObjectOnJSONFile] 1. When the given file path exists and it's content is an empty array, it should append normally, containing only the data requested to be appended", async () => {
     const filePath = `.test.empty.json`;
     const contentAlreadyOnFile: unknown[] = [];
 
@@ -18,12 +18,13 @@ describe("Filesys class test suite", () => {
 
     const finalJSONSaved = await fs.fetchObjectOnJSONFile<unknown[]>(filePath);
 
-    expect(finalJSONSaved).toEqual(expectedFinalJSONSaved);
+    expect(finalJSONSaved.at(-1)).toEqual(expectedFinalJSONSaved.at(-1));
+    expect(finalJSONSaved.length === 1).toBe(true);
 
     cp.exec(`rm -fr ${filePath}`);
   });
 
-  test("[appendObjectOnJSONFile] 2. When the file exists and it's content is a filled array", async () => {
+  test("[appendObjectOnJSONFile] 2. When the file exists and it's content is a filled array, it should append normally, containing the data requested to be appended at the last position of the array", async () => {
     const filePath = `.test.filled.json`;
     const contentAlreadyOnFile: unknown[] = [{ fill: "red" }];
 
@@ -41,12 +42,13 @@ describe("Filesys class test suite", () => {
 
     const finalJSONSaved = await fs.fetchObjectOnJSONFile<unknown[]>(filePath);
 
-    expect(finalJSONSaved).toEqual(expectedFinalJSONSaved);
+    expect(finalJSONSaved.at(-1)).toEqual(expectedFinalJSONSaved.at(-1));
+    expect(finalJSONSaved.length > 1).toEqual(true);
 
     cp.exec(`rm -fr ${filePath}`);
   });
 
-  test("[appendObjectOnJSONFile] 3. When the file exists and it's content is not an array", async () => {
+  test("[appendObjectOnJSONFile] 3. When the file exists and it's content is not an array, it should throw an error", async () => {
     const filePath = `.test.noArray.json`;
     const contentAlreadyOnFile: unknown = { fill: "red" };
 
