@@ -5,7 +5,19 @@ import {
 } from "../consts";
 
 /**
+ * Checks if the given data is a valid path port.
+ * @param path
+ * @returns
+ */
+export const isValidPortPath = (path: unknown): boolean => {
+  if (typeof path !== "string") return false;
+
+  return PORT_PATH_VALIDATION_REGEX.test(path);
+};
+/**
  * Checks if a given data is a valid baud rate.
+ * @param baudRate
+ * @returns
  */
 export const isValidBaudRate = (baudRate: unknown): boolean => {
   if (typeof baudRate !== "string") return false;
@@ -32,7 +44,7 @@ export const isValidCron = (cron: unknown): boolean => {
 
 /**
  * Checks if the given data is a valid Modbus slave address.
- * @param cron
+ * @param sid
  * @returns
  */
 export const isValidSlaveID = (sid: unknown): boolean => {
@@ -41,15 +53,4 @@ export const isValidSlaveID = (sid: unknown): boolean => {
   if (sid < 1 || sid > 247) return false;
 
   return true;
-};
-
-/**
- * Checks if the given data is a valid path port.
- * @param path
- * @returns
- */
-export const isValidPortPath = (path: unknown): boolean => {
-  if (typeof path !== "string") return false;
-
-  return PORT_PATH_VALIDATION_REGEX.test(path);
 };
