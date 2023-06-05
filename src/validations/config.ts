@@ -1,4 +1,8 @@
-import { CRON_VALIDATION_REGEX, VALID_BAUD_RATES } from "../consts";
+import {
+  CRON_VALIDATION_REGEX,
+  PORT_PATH_VALIDATION_REGEX,
+  VALID_BAUD_RATES,
+} from "../consts";
 
 /**
  * Checks if a given data is a valid baud rate.
@@ -37,4 +41,15 @@ export const isValidSlaveID = (sid: unknown): boolean => {
   if (sid < 1 || sid > 247) return false;
 
   return true;
+};
+
+/**
+ * Checks if the given data is a valid path port.
+ * @param path
+ * @returns
+ */
+export const isValidPortPath = (path: unknown): boolean => {
+  if (typeof path !== "string") return false;
+
+  return PORT_PATH_VALIDATION_REGEX.test(path);
 };
