@@ -8,7 +8,7 @@ import {
   VALID_BAUD_RATES,
   VALID_FUNCTION_CODES,
 } from "../consts";
-import { hexToDec } from "../utils";
+import { hexToDec, isTypeOfRegisterType } from "../utils";
 
 /**
  * Checks if the given data is a valid path port.
@@ -145,6 +145,22 @@ export const isValidFunctionCode = (functionCode: unknown): boolean => {
   }
 
   return false;
+};
+
+/**
+ * Checks if the given data is a valid register config.
+ * @param register
+ * @returns
+ */
+export const isValidRegister = (register: unknown): boolean => {
+  if (!isTypeOfRegisterType(register)) return false;
+
+  if (!isValidAddress(register.address)) return false;
+  if (!isValidFunctionCode(register.functionCode)) return false;
+  if (!isValidVariableName(register.variableName)) return false;
+  if (register.ratio) if (!isValidRatio(register.ratio)) return false;
+
+  return true;
 };
 
 /**
