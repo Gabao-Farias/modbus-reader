@@ -1,4 +1,4 @@
-import { VALID_BAUD_RATES } from "../consts";
+import { CRON_VALIDATION_REGEX, VALID_BAUD_RATES } from "../consts";
 
 /**
  * Checks if a given baud rate is valid.
@@ -12,3 +12,11 @@ export const isValidBaudRate = (baudRate: string): boolean => {
 
   return false;
 };
+
+/**
+ * Checks if the given string is a valid cron format.
+ * @param cron
+ * @returns
+ */
+export const isValidCron = (cron: string): boolean =>
+  CRON_VALIDATION_REGEX.test(cron);
