@@ -115,8 +115,13 @@ describe("Config validation test suite", () => {
   });
 
   const portPath5 = { portPath: "dev/ttyXURSB0" };
-  test(`[isValidPortPath] 4. When port path is invalid (${portPath5}), it should return false`, () => {
+  test(`[isValidPortPath] 5. When port path is invalid (${portPath5}), it should return false`, () => {
     expect(isValidPortPath(portPath5)).toBe(false);
+  });
+
+  const portPath6 = "/invalidPath/dev/ttyXURSB0";
+  test(`[isValidPortPath] 6. When port path is invalid (${portPath6}), it should return false`, () => {
+    expect(isValidPortPath(portPath6)).toBe(false);
   });
 
   const orfrt1 = 5;
