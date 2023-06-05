@@ -11,6 +11,7 @@ const {
   isValidVariableName,
   isValidRatio,
   isValidFunctionCode,
+  isValidRegister,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -240,5 +241,68 @@ describe("Config validation test suite", () => {
   const functionCodde2 = 3;
   test(`[isValidFunctionCode] 1. When function code is invalid (${functionCodde2}), it should return false`, () => {
     expect(isValidFunctionCode(functionCodde2)).toBe(false);
+  });
+
+  const register1: RegisterType = {
+    address: "0x2524",
+    functionCode: "02",
+    variableName: "temperatureInsideDevice",
+  };
+  test(`[isValidRegister] 1. When register is valid (${register1}), it should return true`, () => {
+    expect(isValidRegister(register1)).toBe(true);
+  });
+
+  const register2: RegisterType = {
+    address: "2524",
+    functionCode: "01",
+    variableName: "tensionOnGate2",
+    ratio: 0.1,
+  };
+  test(`[isValidRegister] 2. When register is valid (${register2}), it should return true`, () => {
+    expect(isValidRegister(register2)).toBe(true);
+  });
+
+  const register3: unknown = {
+    address: "0x0f12",
+    functionCode: "04",
+    variableName: "PotênciaMotor3",
+    ratio: 10,
+    unusefulVar: "this var will not be used...",
+  };
+  test(`[isValidRegister] 3. When register is valid (${register3}), it should return true`, () => {
+    expect(isValidRegister(register3)).toBe(true);
+  });
+
+  const register4: unknown = {
+    address: "0x0f12",
+    functionCode: 4,
+    variableName: "PotênciaMotor3",
+    ratio: 10,
+    unusefulVar: "this var will not be used...",
+  };
+  test(`[isValidRegister] 4. When register is invalid (${register4}), it should return false`, () => {
+    expect(isValidRegister(register4)).toBe(false);
+  });
+
+  const register5: unknown = {
+    address: "0xf209f4ff",
+    functionCode: "04",
+    variableName: "PotênciaMotor3",
+    ratio: 10,
+    unusefulVar: "this var will not be used...",
+  };
+  test(`[isValidRegister] 5. When register is invalid (${register5}), it should return false`, () => {
+    expect(isValidRegister(register5)).toBe(false);
+  });
+
+  const register6: unknown = {
+    address: "0x00f2",
+    functionCode: "04",
+    variableName: "PotênciaMotor3",
+    ratio: "10",
+    unusefulVar: "this var will not be used...",
+  };
+  test(`[isValidRegister] 6. When register is invalid (${register6}), it should return false`, () => {
+    expect(isValidRegister(register6)).toBe(false);
   });
 });
