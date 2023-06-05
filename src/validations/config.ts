@@ -43,6 +43,21 @@ export const isValidCron = (cron: unknown): boolean => {
 };
 
 /**
+ * Checks if the given data is a valid amount of times for retry read.
+ * @param orfrt
+ * @returns
+ */
+export const isValidOnReadFailRetryTimes = (orfrt: unknown): boolean => {
+  if (typeof orfrt !== "number") return false;
+
+  if (!Number.isInteger(orfrt)) return false;
+
+  if (!(orfrt >= 0)) return false;
+
+  return true;
+};
+
+/**
  * Checks if the given data is a valid Modbus slave address.
  * @param sid
  * @returns
