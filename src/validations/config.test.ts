@@ -1,6 +1,11 @@
 import * as Config from "./config";
-const { isValidBaudRate, isValidCron, isValidSlaveID, isValidPortPath } =
-  jest.requireActual<typeof Config>("./config");
+const {
+  isValidBaudRate,
+  isValidCron,
+  isValidSlaveID,
+  isValidPortPath,
+  isValidOnReadFailRetryTimes,
+} = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
   test("[isValidBaudRate] 1. When a baud rate is valid, it should return true", () => {
@@ -109,5 +114,25 @@ describe("Config validation test suite", () => {
   const portPath5 = { portPath: "dev/ttyXURSB0" };
   test(`[isValidPortPath] 4. When port path is invalid (${portPath5}), it should return false`, () => {
     expect(isValidPortPath(portPath5)).toBe(false);
+  });
+
+  const orfrt1 = 5;
+  test(`[isValidOnReadFailRetryTimes] 1. When retry times is valid (${orfrt1}), it should return true`, () => {
+    expect(isValidOnReadFailRetryTimes(orfrt1)).toBe(true);
+  });
+
+  const orfrt2 = 4.7;
+  test(`[isValidOnReadFailRetryTimes] 2. When retry times is invalid (${orfrt2}), it should return false`, () => {
+    expect(isValidOnReadFailRetryTimes(orfrt2)).toBe(false);
+  });
+
+  const orfrt3 = -2;
+  test(`[isValidOnReadFailRetryTimes] 3. When retry times is invalid (${orfrt3}), it should return false`, () => {
+    expect(isValidOnReadFailRetryTimes(orfrt3)).toBe(false);
+  });
+
+  const orfrt4 = "5";
+  test(`[isValidOnReadFailRetryTimes] 4. When retry times is invalid (${orfrt4} as string), it should return false`, () => {
+    expect(isValidOnReadFailRetryTimes(orfrt4)).toBe(false);
   });
 });
