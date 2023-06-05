@@ -85,6 +85,17 @@ export const isValidOutputFile = (outFile: unknown): boolean => {
 };
 
 /**
+ * Checks if the given data is a valid variable name.
+ * @param varName
+ * @returns
+ */
+export const isValidVariableName = (varName: unknown): boolean => {
+  if (typeof varName !== "string") return false;
+
+  return true;
+};
+
+/**
  * Checks if the given data is a valid register address.
  * @param addr
  * @returns
