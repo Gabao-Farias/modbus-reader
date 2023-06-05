@@ -164,6 +164,23 @@ export const isValidRegister = (register: unknown): boolean => {
 };
 
 /**
+ * Checks if the given data is a valid set of register config array.
+ * @param registers
+ * @returns
+ */
+export const areValidRegisters = (registers: unknown): boolean => {
+  if (!Array.isArray(registers)) return false;
+
+  for (let index = 0; index < registers.length; index++) {
+    const register = registers[index];
+
+    if (!isValidRegister(register)) return false;
+  }
+
+  return true;
+};
+
+/**
  * Checks if the given data is a valid Modbus slave address.
  * @param sid
  * @returns
