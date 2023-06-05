@@ -6,6 +6,7 @@ const {
   isValidPortPath,
   isValidOnReadFailRetryTimes,
   isValidShowLogs,
+  isValidOutputFile,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -150,5 +151,20 @@ describe("Config validation test suite", () => {
   const showLogs3 = { showLogs: "true" };
   test(`[isValidShowLogs] 3. When show logs is invalid (${showLogs3}), it should return false`, () => {
     expect(isValidShowLogs(showLogs3)).toBe(false);
+  });
+
+  const outputFile1 = "/Users/adalovelace";
+  test(`[isValidOutputFile] 1. When output file is valid (${outputFile1}), it should return true`, () => {
+    expect(isValidOutputFile(outputFile1)).toBe(true);
+  });
+
+  const outputFile2 = " /Users/adalovelace";
+  test(`[isValidOutputFile] 2. When output file is invalid (${outputFile2}), it should return false`, () => {
+    expect(isValidOutputFile(outputFile2)).toBe(false);
+  });
+
+  const outputFile3 = { outputFile: "/Users/adalovelace" };
+  test(`[isValidOutputFile] 3. When output file is invalid (${outputFile3}), it should return false`, () => {
+    expect(isValidOutputFile(outputFile3)).toBe(false);
   });
 });
