@@ -15,6 +15,12 @@ describe("Config validation test suite", () => {
     expect(isValidBaudRate(invalidBaudRate)).toBe(false);
   });
 
+  test("[isValidBaudRate] 3. When a baud rate is invalid, it should return false", () => {
+    const invalidBaudRate = { baudRate: "9600" };
+
+    expect(isValidBaudRate(invalidBaudRate)).toBe(false);
+  });
+
   const validCron1 = "*/5 * * * *";
   test(`[isValidCron] 1. When a cron is valid (${validCron1}), it should return true`, () => {
     expect(isValidCron(validCron1)).toBe(true);
@@ -45,6 +51,11 @@ describe("Config validation test suite", () => {
     expect(isValidCron(invalidCron3)).toBe(false);
   });
 
+  const invalidCron4 = { cron: "* * * * *" };
+  test(`[isValidCron] 7. When a cron is invalid (${invalidCron4}), it should return false`, () => {
+    expect(isValidCron(invalidCron4)).toBe(false);
+  });
+
   const slaveID1 = 1;
   test(`[isValidSlaveID] 1. When slave ID is valid (${slaveID1}), it should return true`, () => {
     expect(isValidSlaveID(slaveID1)).toBe(true);
@@ -71,7 +82,7 @@ describe("Config validation test suite", () => {
   });
 
   const objectData = { id: 1 };
-  test(`[isValidSlaveID] 5. When slave ID is invalid (${objectData}), it should return false`, () => {
+  test(`[isValidSlaveID] 6. When slave ID is invalid (${objectData}), it should return false`, () => {
     expect(isValidSlaveID(objectData)).toBe(false);
   });
 });
