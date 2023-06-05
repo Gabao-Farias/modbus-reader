@@ -105,11 +105,7 @@ export const isValidAddress = (addr: unknown): boolean => {
 
   if (!HEX_VALIDATION_REGEX.test(addr)) return false;
 
-  console.log(addr);
-
   const decimalValue = hexToDec(addr);
-
-  console.log(decimalValue);
 
   if (!Number.isInteger(decimalValue)) return false;
 
@@ -118,6 +114,17 @@ export const isValidAddress = (addr: unknown): boolean => {
     decimalValue > HIGHEST_VALUE_REGISTER_ADDRES_RANGE
   )
     return false;
+
+  return true;
+};
+
+/**
+ * Checks if the given data is a valid ratio.
+ * @param ratio
+ * @returns
+ */
+export const isValidRatio = (ratio: unknown): boolean => {
+  if (typeof ratio !== "number") return false;
 
   return true;
 };
