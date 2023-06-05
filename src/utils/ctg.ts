@@ -14,3 +14,23 @@ export const isTypeOfRegisterType = (
     "functionCode" in register
   );
 };
+
+/**
+ * Checks if given data is type of Config Type.
+ * @param config
+ * @returns
+ */
+export const isTypeOfConfigType = (config: unknown): config is ConfigType => {
+  return (
+    typeof config === "object" &&
+    config !== null &&
+    "portPath" in config &&
+    "baudRate" in config &&
+    "cron" in config &&
+    "onReadFailRetryTimes" in config &&
+    "showLogs" in config &&
+    "outputFile" in config &&
+    "registers" in config &&
+    "slaveID" in config
+  );
+};
