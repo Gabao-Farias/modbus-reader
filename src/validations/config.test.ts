@@ -7,6 +7,7 @@ const {
   isValidOnReadFailRetryTimes,
   isValidShowLogs,
   isValidOutputFile,
+  isValidAddress,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -166,5 +167,35 @@ describe("Config validation test suite", () => {
   const outputFile3 = { outputFile: "/Users/adalovelace" };
   test(`[isValidOutputFile] 3. When output file is invalid (${outputFile3}), it should return false`, () => {
     expect(isValidOutputFile(outputFile3)).toBe(false);
+  });
+
+  const registerAddress1 = "0x0201";
+  test(`[isValidAddress] 1. When register address is valid (${registerAddress1}), it should return true`, () => {
+    expect(isValidAddress(registerAddress1)).toBe(true);
+  });
+
+  const registerAddress2 = "11F3";
+  test(`[isValidAddress] 2. When register address is valid (${registerAddress2}), it should return true`, () => {
+    expect(isValidAddress(registerAddress2)).toBe(true);
+  });
+
+  const registerAddress3 = "0x0AF9";
+  test(`[isValidAddress] 3. When register address is valid (${registerAddress3}), it should return true`, () => {
+    expect(isValidAddress(registerAddress3)).toBe(true);
+  });
+
+  const registerAddress4 = "0xf20201";
+  test(`[isValidAddress] 4. When register address is invalid (${registerAddress4}), it should return false`, () => {
+    expect(isValidAddress(registerAddress4)).toBe(false);
+  });
+
+  const registerAddress5 = "-4f35f3";
+  test(`[isValidAddress] 5. When register address is invalid (${registerAddress5}), it should return false`, () => {
+    expect(isValidAddress(registerAddress5)).toBe(false);
+  });
+
+  const registerAddress6 = "52.61";
+  test(`[isValidAddress] 6. When register address is invalid (${registerAddress6}), it should return false`, () => {
+    expect(isValidAddress(registerAddress6)).toBe(false);
   });
 });
