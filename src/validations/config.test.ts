@@ -13,6 +13,7 @@ const {
   isValidFunctionCode,
   isValidRegister,
   areValidRegisters,
+  isValidConfig,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -365,5 +366,83 @@ describe("Config validation test suite", () => {
   ];
   test(`[areValidRegisters] 2. If one of the registers is invalid, it should return false`, () => {
     expect(areValidRegisters(registers2)).toBe(false);
+  });
+
+  const config1: ConfigType = {
+    portPath: "/dev/ttyUSB0",
+    baudRate: "115200",
+    cron: "*/5 * * * *",
+    onReadFailRetryTimes: 3,
+    outputFile: "/Users/adalovelace/modbusReadData/hydraulic-engine.json",
+    slaveID: 1,
+    showLogs: true,
+    registers: [
+      {
+        address: "0x00f2",
+        functionCode: "03",
+        variableName: "PotênciaMotor1",
+        ratio: 10,
+      },
+      {
+        address: "0x00f3",
+        functionCode: "03",
+        variableName: "PotênciaMotor2",
+        ratio: 10,
+      },
+      {
+        address: "0x00f4",
+        functionCode: "03",
+        variableName: "PotênciaMotor3",
+        ratio: 10,
+      },
+      {
+        address: "0x00f5",
+        functionCode: "03",
+        variableName: "PotênciaMotor4",
+        ratio: 10,
+      },
+    ],
+  };
+  test(`[isValidConfig] 1. When config is valid, it should return true`, () => {
+    expect(isValidConfig(config1)).toBe(true);
+  });
+
+  const config2: unknown = {
+    portPath: "/dev/ttyUSB0",
+    baudRate: "115200",
+    cron: "*/5 * * * *",
+    onReadFailRetryTimes: 3,
+    outputFile: "/Users/adalovelace/modbusReadData/hydraulic-engine.json",
+    slaveID: "1",
+    showLogs: true,
+    registers: [
+      {
+        address: "0x00f2",
+        functionCode: "03",
+        variableName: "PotênciaMotor1",
+        ratio: 10,
+      },
+      {
+        address: "0x00f3",
+        functionCode: "03",
+        variableName: "PotênciaMotor2",
+        ratio: 10,
+      },
+      {
+        address: "0x00f4",
+        functionCode: "03",
+        variableName: "PotênciaMotor3",
+        ratio: 10,
+      },
+      {
+        address: "0x00f5",
+        functionCode: "03",
+        variableName: "PotênciaMotor4",
+        ratio: 10,
+      },
+    ],
+  };
+  test(`[isValidConfig] 2. When config is invalid, it should return false`, () => {
+    expect(isValidConfig(config2)).toBe(false);
   });
 });
