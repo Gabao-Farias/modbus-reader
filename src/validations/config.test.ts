@@ -1,5 +1,5 @@
 import * as Config from "./config";
-const { isValidBaudRate, isValidCron, isValidSlaveID } =
+const { isValidBaudRate, isValidCron, isValidSlaveID, isValidPortPath } =
   jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -84,5 +84,30 @@ describe("Config validation test suite", () => {
   const objectData = { id: 1 };
   test(`[isValidSlaveID] 6. When slave ID is invalid (${objectData}), it should return false`, () => {
     expect(isValidSlaveID(objectData)).toBe(false);
+  });
+
+  const portPath1 = "/dev/ttyXURSB0";
+  test(`[isValidPortPath] 1. When port path is valid (${portPath1}), it should return true`, () => {
+    expect(isValidPortPath(portPath1)).toBe(true);
+  });
+
+  const portPath2 = "/dev/ttyACM0";
+  test(`[isValidPortPath] 2. When port path is valid (${portPath2}), it should return true`, () => {
+    expect(isValidPortPath(portPath2)).toBe(true);
+  });
+
+  const portPath3 = "/dev/tatyUSB0";
+  test(`[isValidPortPath] 3. When port path is invalid (${portPath3}), it should return false`, () => {
+    expect(isValidPortPath(portPath3)).toBe(false);
+  });
+
+  const portPath4 = "dev/ttyXURSB0";
+  test(`[isValidPortPath] 4. When port path is invalid (${portPath4}), it should return false`, () => {
+    expect(isValidPortPath(portPath4)).toBe(false);
+  });
+
+  const portPath5 = { portPath: "dev/ttyXURSB0" };
+  test(`[isValidPortPath] 4. When port path is invalid (${portPath5}), it should return false`, () => {
+    expect(isValidPortPath(portPath5)).toBe(false);
   });
 });
