@@ -5,6 +5,7 @@ const {
   isValidSlaveID,
   isValidPortPath,
   isValidOnReadFailRetryTimes,
+  isValidShowLogs,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -134,5 +135,20 @@ describe("Config validation test suite", () => {
   const orfrt4 = "5";
   test(`[isValidOnReadFailRetryTimes] 4. When retry times is invalid (${orfrt4} as string), it should return false`, () => {
     expect(isValidOnReadFailRetryTimes(orfrt4)).toBe(false);
+  });
+
+  const showLogs1 = true;
+  test(`[isValidShowLogs] 1. When show logs is valid (${showLogs1}), it should return true`, () => {
+    expect(isValidShowLogs(showLogs1)).toBe(true);
+  });
+
+  const showLogs2 = "true";
+  test(`[isValidShowLogs] 2. When show logs is invalid (${showLogs2}), it should return false`, () => {
+    expect(isValidShowLogs(showLogs2)).toBe(false);
+  });
+
+  const showLogs3 = { showLogs: "true" };
+  test(`[isValidShowLogs] 3. When show logs is invalid (${showLogs3}), it should return false`, () => {
+    expect(isValidShowLogs(showLogs3)).toBe(false);
   });
 });
