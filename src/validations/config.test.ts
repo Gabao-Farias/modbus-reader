@@ -1,5 +1,5 @@
 import * as Config from "./config";
-const { isValidBaudRate, isValidCron } =
+const { isValidBaudRate, isValidCron, isValidSlaveID } =
   jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -43,5 +43,35 @@ describe("Config validation test suite", () => {
   const invalidCron3 = "* * * * 10";
   test(`[isValidCron] 6. When a cron is invalid (${invalidCron3}), it should return false`, () => {
     expect(isValidCron(invalidCron3)).toBe(false);
+  });
+
+  const slaveID1 = 1;
+  test(`[isValidSlaveID] 1. When slave ID is valid (${slaveID1}), it should return true`, () => {
+    expect(isValidSlaveID(slaveID1)).toBe(true);
+  });
+
+  const slaveID247 = 247;
+  test(`[isValidSlaveID] 2. When slave ID is valid (${slaveID247}), it should return true`, () => {
+    expect(isValidSlaveID(slaveID247)).toBe(true);
+  });
+
+  const slaveID0 = 0;
+  test(`[isValidSlaveID] 3. When slave ID is invalid (${slaveID0}), it should return false`, () => {
+    expect(isValidSlaveID(slaveID0)).toBe(false);
+  });
+
+  const slaveID248 = 248;
+  test(`[isValidSlaveID] 4. When slave ID is invalid (${slaveID248}), it should return false`, () => {
+    expect(isValidSlaveID(slaveID248)).toBe(false);
+  });
+
+  const stringData = "1";
+  test(`[isValidSlaveID] 5. When slave ID is invalid (${stringData}), it should return false`, () => {
+    expect(isValidSlaveID(stringData)).toBe(false);
+  });
+
+  const objectData = { id: 1 };
+  test(`[isValidSlaveID] 5. When slave ID is invalid (${objectData}), it should return false`, () => {
+    expect(isValidSlaveID(objectData)).toBe(false);
   });
 });
