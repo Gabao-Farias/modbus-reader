@@ -9,6 +9,7 @@ const {
   isValidOutputFile,
   isValidAddress,
   isValidVariableName,
+  isValidRatio,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -218,5 +219,15 @@ describe("Config validation test suite", () => {
   const varName3 = { variableName: "deviceTemperature" };
   test(`[isValidVariableName] 2. When variable name is invalid (${varName3}), it should return false`, () => {
     expect(isValidVariableName(varName3)).toBe(false);
+  });
+
+  const ratio1 = 1.634;
+  test(`[isValidRatio] 1. When register address is valid (${ratio1}), it should return true`, () => {
+    expect(isValidRatio(ratio1)).toBe(true);
+  });
+
+  const ratio2 = "10";
+  test(`[isValidRatio] 2. When register address is invalid (${ratio2}), it should return false`, () => {
+    expect(isValidRatio(ratio2)).toBe(false);
   });
 });
