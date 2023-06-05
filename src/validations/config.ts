@@ -1,9 +1,13 @@
 import {
   CRON_VALIDATION_REGEX,
+  HEX_VALIDATION_REGEX,
+  HIGHEST_VALUE_REGISTER_ADDRES_RANGE,
   LINUX_PATH_VALIDATION_REGEX,
+  LOWEST_VALUE_REGISTER_ADDRES_RANGE,
   PORT_PATH_VALIDATION_REGEX,
   VALID_BAUD_RATES,
 } from "../consts";
+import { hexToDec } from "../utils";
 
 /**
  * Checks if the given data is a valid path port.
@@ -78,6 +82,33 @@ export const isValidOutputFile = (outFile: unknown): boolean => {
   if (typeof outFile !== "string") return false;
 
   return LINUX_PATH_VALIDATION_REGEX.test(outFile);
+};
+
+/**
+ * Checks if the given data is a valid register address.
+ * @param addr
+ * @returns
+ */
+export const isValidAddress = (addr: unknown): boolean => {
+  if (typeof addr !== "string") return false;
+
+  if (!HEX_VALIDATION_REGEX.test(addr)) return false;
+
+  console.log(addr);
+
+  const decimalValue = hexToDec(addr);
+
+  console.log(decimalValue);
+
+  if (!Number.isInteger(decimalValue)) return false;
+
+  if (
+    decimalValue < LOWEST_VALUE_REGISTER_ADDRES_RANGE ||
+    decimalValue > HIGHEST_VALUE_REGISTER_ADDRES_RANGE
+  )
+    return false;
+
+  return true;
 };
 
 /**
