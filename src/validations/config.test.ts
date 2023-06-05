@@ -10,6 +10,7 @@ const {
   isValidAddress,
   isValidVariableName,
   isValidRatio,
+  isValidFunctionCode,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -229,5 +230,15 @@ describe("Config validation test suite", () => {
   const ratio2 = "10";
   test(`[isValidRatio] 2. When register address is invalid (${ratio2}), it should return false`, () => {
     expect(isValidRatio(ratio2)).toBe(false);
+  });
+
+  const functionCodde1 = "03";
+  test(`[isValidFunctionCode] 1. When function code is valid (${functionCodde1}), it should return true`, () => {
+    expect(isValidFunctionCode(functionCodde1)).toBe(true);
+  });
+
+  const functionCodde2 = 3;
+  test(`[isValidFunctionCode] 1. When function code is invalid (${functionCodde2}), it should return false`, () => {
+    expect(isValidFunctionCode(functionCodde2)).toBe(false);
   });
 });
