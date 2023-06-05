@@ -8,6 +8,7 @@ const {
   isValidShowLogs,
   isValidOutputFile,
   isValidAddress,
+  isValidVariableName,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -202,5 +203,20 @@ describe("Config validation test suite", () => {
   const registerAddress6 = "52.61";
   test(`[isValidAddress] 6. When register address is invalid (${registerAddress6}), it should return false`, () => {
     expect(isValidAddress(registerAddress6)).toBe(false);
+  });
+
+  const varName1 = "potênciaDoMotor1";
+  test(`[isValidVariableName] 1. When variable name is valid (${varName1}), it should return true`, () => {
+    expect(isValidVariableName(varName1)).toBe(true);
+  });
+
+  const varName2 = "tensão-da-rede-4";
+  test(`[isValidVariableName] 2. When variable name is valid (${varName2}), it should return true`, () => {
+    expect(isValidVariableName(varName2)).toBe(true);
+  });
+
+  const varName3 = { variableName: "deviceTemperature" };
+  test(`[isValidVariableName] 2. When variable name is invalid (${varName3}), it should return false`, () => {
+    expect(isValidVariableName(varName3)).toBe(false);
   });
 });
