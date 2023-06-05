@@ -6,6 +6,7 @@ import {
   LOWEST_VALUE_REGISTER_ADDRES_RANGE,
   PORT_PATH_VALIDATION_REGEX,
   VALID_BAUD_RATES,
+  VALID_FUNCTION_CODES,
 } from "../consts";
 import { hexToDec } from "../utils";
 
@@ -127,6 +128,23 @@ export const isValidRatio = (ratio: unknown): boolean => {
   if (typeof ratio !== "number") return false;
 
   return true;
+};
+
+/**
+ * Checks if the given data is a valid Modbus function code.
+ * @param functionCode
+ * @returns
+ */
+export const isValidFunctionCode = (functionCode: unknown): boolean => {
+  if (typeof functionCode !== "string") return false;
+
+  for (let index = 0; index < VALID_FUNCTION_CODES.length; index++) {
+    const validFunctionCode = VALID_FUNCTION_CODES[index];
+
+    if (validFunctionCode === functionCode) return true;
+  }
+
+  return false;
 };
 
 /**
