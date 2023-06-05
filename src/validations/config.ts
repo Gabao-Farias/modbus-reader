@@ -1,5 +1,6 @@
 import {
   CRON_VALIDATION_REGEX,
+  LINUX_PATH_VALIDATION_REGEX,
   PORT_PATH_VALIDATION_REGEX,
   VALID_BAUD_RATES,
 } from "../consts";
@@ -66,6 +67,17 @@ export const isValidShowLogs = (showLogs: unknown): boolean => {
   if (typeof showLogs !== "boolean") return false;
 
   return true;
+};
+
+/**
+ * Checks if the given data is a valid output file path.
+ * @param outFile
+ * @returns
+ */
+export const isValidOutputFile = (outFile: unknown): boolean => {
+  if (typeof outFile !== "string") return false;
+
+  return LINUX_PATH_VALIDATION_REGEX.test(outFile);
 };
 
 /**
