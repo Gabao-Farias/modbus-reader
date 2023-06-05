@@ -12,6 +12,7 @@ const {
   isValidRatio,
   isValidFunctionCode,
   isValidRegister,
+  areValidRegisters,
 } = jest.requireActual<typeof Config>("./config");
 
 describe("Config validation test suite", () => {
@@ -304,5 +305,65 @@ describe("Config validation test suite", () => {
   };
   test(`[isValidRegister] 6. When register is invalid (${register6}), it should return false`, () => {
     expect(isValidRegister(register6)).toBe(false);
+  });
+
+  const registers1: RegisterType[] = [
+    {
+      address: "0x00f2",
+      functionCode: "03",
+      variableName: "PotênciaMotor1",
+      ratio: 10,
+    },
+    {
+      address: "0x00f3",
+      functionCode: "03",
+      variableName: "PotênciaMotor2",
+      ratio: 10,
+    },
+    {
+      address: "0x00f4",
+      functionCode: "03",
+      variableName: "PotênciaMotor3",
+      ratio: 10,
+    },
+    {
+      address: "0x00f5",
+      functionCode: "03",
+      variableName: "PotênciaMotor4",
+      ratio: 10,
+    },
+  ];
+  test(`[areValidRegisters] 1. When registers are valid, it should return true`, () => {
+    expect(areValidRegisters(registers1)).toBe(true);
+  });
+
+  const registers2: unknown[] = [
+    {
+      address: "0x00f2",
+      functionCode: "03",
+      variableName: "PotênciaMotor1",
+      ratio: 10,
+    },
+    {
+      address: "0x00f3",
+      functionCode: "03",
+      variableName: "PotênciaMotor2",
+      ratio: 10,
+    },
+    {
+      address: "0x00f4",
+      functionCode: "03",
+      variableName: "PotênciaMotor3",
+      ratio: 10,
+    },
+    {
+      address: "0x00f5",
+      functionCode: "03",
+      variableName: "PotênciaMotor4",
+      ratio: "10",
+    },
+  ];
+  test(`[areValidRegisters] 2. If one of the registers is invalid, it should return false`, () => {
+    expect(areValidRegisters(registers2)).toBe(false);
   });
 });
