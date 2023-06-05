@@ -8,7 +8,7 @@ import {
   VALID_BAUD_RATES,
   VALID_FUNCTION_CODES,
 } from "../consts";
-import { hexToDec, isTypeOfRegisterType } from "../utils";
+import { hexToDec, isTypeOfConfigType, isTypeOfRegisterType } from "../utils";
 
 /**
  * Checks if the given data is a valid path port.
@@ -189,6 +189,26 @@ export const isValidSlaveID = (sid: unknown): boolean => {
   if (typeof sid !== "number") return false;
 
   if (sid < 1 || sid > 247) return false;
+
+  return true;
+};
+
+/**
+ * Checks if the given data is a valid Config Type object.
+ * @param config
+ * @returns
+ */
+export const isValidConfig = (config: unknown) => {
+  if (!isTypeOfConfigType(config)) return false;
+
+  if (!isValidPortPath(config.portPath)) return false;
+  if (!isValidBaudRate(config.baudRate)) return false;
+  if (!isValidCron(config.cron)) return false;
+  if (!isValidOnReadFailRetryTimes(config.onReadFailRetryTimes)) return false;
+  if (!isValidShowLogs(config.showLogs)) return false;
+  if (!isValidOutputFile(config.outputFile)) return false;
+  if (!areValidRegisters(config.registers)) return false;
+  if (!isValidSlaveID(config.slaveID)) return false;
 
   return true;
 };
