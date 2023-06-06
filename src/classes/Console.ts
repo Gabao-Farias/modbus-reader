@@ -1,4 +1,4 @@
-declare type ConsoleContexts = "No Context" | "Filesys";
+declare type ConsoleContexts = "No Context" | "Filesys" | "Config";
 
 export default class Console {
   private context: ConsoleContexts;
