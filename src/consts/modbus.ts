@@ -16,3 +16,14 @@ export const LOWEST_VALUE_REGISTER_ADDRES_RANGE = 0;
  * Highest valid value of the Modbus register address range.
  */
 export const HIGHEST_VALUE_REGISTER_ADDRES_RANGE = 65535;
+
+/**
+ * Relation of modbus read functions and it's names.
+ */
+export const MODBUS_READ_FUNCTIONS_TO_FUNCTIONS_NAMES: ModbusReadFunctionsGenericMapper =
+  {
+    "01": `readCoils`,
+    "02": `readDiscreteInputs`,
+    "03": `readHoldingRegisters`,
+    "04": `readInputRegisters`,
+  };
