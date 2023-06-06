@@ -1,20 +1,19 @@
-import * as Config from "./config";
-const {
-  isValidBaudRate,
-  isValidCron,
-  isValidSlaveID,
-  isValidPortPath,
-  isValidOnReadFailRetryTimes,
-  isValidShowLogs,
-  isValidOutputFile,
-  isValidAddress,
-  isValidVariableName,
-  isValidRatio,
-  isValidFunctionCode,
-  isValidRegister,
+import {
   areValidRegisters,
+  isValidAddress,
+  isValidBaudRate,
   isValidConfig,
-} = jest.requireActual<typeof Config>("./config");
+  isValidCron,
+  isValidFunctionCode,
+  isValidOnReadFailRetryTimes,
+  isValidOutputFile,
+  isValidPortPath,
+  isValidRatio,
+  isValidRegister,
+  isValidShowLogs,
+  isValidSlaveID,
+  isValidVariableName,
+} from "./config";
 
 describe("Config validation test suite", () => {
   test("[isValidBaudRate] 1. When a baud rate is valid, it should return true", () => {
