@@ -14,6 +14,7 @@
     "build-test": "tsc -p tsconfig.build.json || rm -fr build"
   },
   "devDependencies": {
+    "@types/cron": "2.0.1",
     "@types/jest": "29.5.2",
     "@typescript-eslint/eslint-plugin": "5.59.8",
     "@typescript-eslint/parser": "5.59.8",
@@ -25,6 +26,7 @@
     "typescript": "5.0.4"
   },
   "dependencies": {
+    "cron": "2.3.1",
     "modbus-serial": "8.0.11"
   }
 }
