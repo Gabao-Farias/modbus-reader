@@ -409,6 +409,44 @@ describe("Config validation test suite", () => {
   const config2: unknown = {
     portPath: "/dev/ttyUSB0",
     baudRate: "115200",
+    onReadFailRetryTimes: 3,
+    outputFile: "/Users/adalovelace/modbusReadData/hydraulic-engine.json",
+    slaveID: 3,
+    showLogs: true,
+    registers: [
+      {
+        address: "0x00f2",
+        functionCode: "03",
+        variableName: "PotênciaMotor1",
+        ratio: 10,
+      },
+      {
+        address: "0x00f3",
+        functionCode: "03",
+        variableName: "PotênciaMotor2",
+        ratio: 10,
+      },
+      {
+        address: "0x00f4",
+        functionCode: "03",
+        variableName: "PotênciaMotor3",
+        ratio: 10,
+      },
+      {
+        address: "0x00f5",
+        functionCode: "03",
+        variableName: "PotênciaMotor4",
+        ratio: 10,
+      },
+    ],
+  };
+  test(`[isValidConfig] 2. When config is valid but property 'cron' is not defined, it should return true`, () => {
+    expect(isValidConfig(config2)).toBe(true);
+  });
+
+  const config3: unknown = {
+    portPath: "/dev/ttyUSB0",
+    baudRate: "115200",
     cron: "*/5 * * * *",
     onReadFailRetryTimes: 3,
     outputFile: "/Users/adalovelace/modbusReadData/hydraulic-engine.json",
@@ -441,7 +479,7 @@ describe("Config validation test suite", () => {
       },
     ],
   };
-  test(`[isValidConfig] 2. When config is invalid, it should return false`, () => {
-    expect(isValidConfig(config2)).toBe(false);
+  test(`[isValidConfig] 3. When config is invalid, it should return false`, () => {
+    expect(isValidConfig(config3)).toBe(false);
   });
 });
