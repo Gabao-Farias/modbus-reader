@@ -57,11 +57,13 @@ export default class Modbus {
   /**
    * Close the modbus connection.
    */
-  closeConnection(callBack: () => void) {
+  closeConnection(callBack?: () => void) {
     console.contextLog(`Closing Modbus connection...`);
 
-    this.bus.close(callBack);
+    this.bus.close(() => {
+      if (callBack) callBack();
 
-    console.contextLog(`Modbus connection closed successfully!`);
+      console.contextLog(`Modbus connection closed successfully!`);
+    });
   }
 }
