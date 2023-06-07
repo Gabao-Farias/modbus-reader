@@ -26,7 +26,6 @@ export const isTypeOfConfigType = (config: unknown): config is ConfigType => {
     config !== null &&
     "portPath" in config &&
     "baudRate" in config &&
-    "cron" in config &&
     "onReadFailRetryTimes" in config &&
     "showLogs" in config &&
     "outputFile" in config &&

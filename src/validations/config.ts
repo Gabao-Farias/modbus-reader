@@ -203,7 +203,7 @@ export const isValidConfig = (config: unknown) => {
 
   if (!isValidPortPath(config.portPath)) return false;
   if (!isValidBaudRate(config.baudRate)) return false;
-  if (!isValidCron(config.cron)) return false;
+  if (config.cron && !isValidCron(config.cron)) return false;
   if (!isValidOnReadFailRetryTimes(config.onReadFailRetryTimes)) return false;
   if (!isValidShowLogs(config.showLogs)) return false;
   if (!isValidOutputFile(config.outputFile)) return false;
