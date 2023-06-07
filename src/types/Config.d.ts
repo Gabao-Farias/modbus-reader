@@ -31,7 +31,7 @@ declare type ConfigType = {
   /**
    * Baud rate of the serial connection.
    */
-  baudRate?: BaudRates;
+  baudRate: BaudRates;
   /**
    * String defining the cron of execution of the project.
    */
@@ -39,21 +39,21 @@ declare type ConfigType = {
   /**
    * If the process of reading the register fails, it can be set a number to determine the amount of retries.
    */
-  onReadFailRetryTimes?: number;
+  onReadFailRetryTimes: number;
   /**
    * Defines if internal processes logs must be shown.
    */
-  showLogs?: boolean;
+  showLogs: boolean;
   /**
    * Path of the file that will contain all the read data saved.
    */
-  outputFile?: string;
+  outputFile: string;
   /**
    * Set of registers to be read.
    */
-  registers?: RegisterType[];
+  registers: RegisterType[];
   /**
    * ID of the server.
    */
-  slaveID?: number;
+  slaveID: number;
 };
