@@ -3,7 +3,8 @@ declare type ConsoleContexts =
   | "Filesys"
   | "Config"
   | "Modbus"
-  | "Server";
+  | "Server"
+  | "Global";
 
 export default class Console {
   private context: ConsoleContexts;
