@@ -83,9 +83,9 @@ export default class Server {
     const { cron, outputFile } = this.cf;
 
     if (cron) {
-      this.fs.appendObjectOnJSONFile(data, outputFile);
+      await this.fs.appendObjectOnJSONFile(data, outputFile);
     } else {
-      this.fs.writeObjectOnJSONFile(data, outputFile);
+      await this.fs.writeObjectOnJSONFile(data, outputFile);
     }
 
     console.contextLog(`Data saved successfully!`);
