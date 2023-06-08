@@ -3,3 +3,8 @@ export const CRON_VALIDATION_REGEX =
 export const PORT_PATH_VALIDATION_REGEX = /^\/dev\/tty.+$/;
 export const LINUX_PATH_VALIDATION_REGEX = /^(\/[^/ ]*)+\/?$/;
 export const HEX_VALIDATION_REGEX = /^(0[xX])?([0-9a-fA-F])+$/;
+
+/**
+ * Default file path where the user should create the configuration file.
+ */
+export const DEFAULT_CONFIG_PATH = `${process.env.HOME}/.modbusreaderrc.json`;
