@@ -1,5 +1,8 @@
 import ModbusRTU from "modbus-serial";
-import { MODBUS_READ_FUNCTIONS_TO_FUNCTIONS_NAMES } from "../consts";
+import {
+  MODBUS_READ_FUNCTIONS_TO_FUNCTIONS_NAMES,
+  REGISTER_READ_TIMEOUT,
+} from "../consts";
 import { hexToDec } from "../utils";
 import Console from "./Console";
 
@@ -15,6 +18,7 @@ export default class Modbus {
     this.bus = new ModbusRTU();
 
     this.bus.setID(config.slaveID as number);
+    this.bus.setTimeout(REGISTER_READ_TIMEOUT);
   }
 
   /**

@@ -28,6 +28,11 @@ export const LOWEST_VALUE_SLAVE_ID_RANGE = 1;
 export const HIGHEST_VALUE_SLAVE_ID_RANGE = 247;
 
 /**
+ * Default timeout defined for register read.
+ */
+export const REGISTER_READ_TIMEOUT = 1000;
+
+/**
  * Relation of modbus read functions and it's names.
  */
 export const MODBUS_READ_FUNCTIONS_TO_FUNCTIONS_NAMES: ModbusReadFunctionsGenericMapper =
