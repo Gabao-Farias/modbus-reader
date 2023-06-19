@@ -1,3 +1,4 @@
+import { DEFAULT_CONFIG_PATH } from "../consts";
 import { isValidConfig } from "../validations";
 import Console from "./Console";
 import Filesys from "./Filesys";
@@ -10,7 +11,7 @@ export default class Config {
   /**
    * Default path for reading the user's defined configuration file.
    */
-  private defaultConfigPath = `${process.env.HOME}/.modbusreaderrc.json`;
+  private defaultConfigPath = DEFAULT_CONFIG_PATH;
   /**
    * Default configuration values. Those values will fill the fields which were not defined by the user.
    */

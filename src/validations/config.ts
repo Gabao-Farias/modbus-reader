@@ -2,8 +2,10 @@ import {
   CRON_VALIDATION_REGEX,
   HEX_VALIDATION_REGEX,
   HIGHEST_VALUE_REGISTER_ADDRES_RANGE,
+  HIGHEST_VALUE_SLAVE_ID_RANGE,
   LINUX_PATH_VALIDATION_REGEX,
   LOWEST_VALUE_REGISTER_ADDRES_RANGE,
+  LOWEST_VALUE_SLAVE_ID_RANGE,
   PORT_PATH_VALIDATION_REGEX,
   VALID_BAUD_RATES,
   VALID_FUNCTION_CODES,
@@ -188,7 +190,8 @@ export const areValidRegisters = (registers: unknown): boolean => {
 export const isValidSlaveID = (sid: unknown): boolean => {
   if (typeof sid !== "number") return false;
 
-  if (sid < 1 || sid > 247) return false;
+  if (sid < LOWEST_VALUE_SLAVE_ID_RANGE || sid > HIGHEST_VALUE_SLAVE_ID_RANGE)
+    return false;
 
   return true;
 };

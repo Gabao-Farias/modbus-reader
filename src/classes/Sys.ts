@@ -1,8 +1,9 @@
+import { VALID_PLATFORMS } from "../consts";
 export default class Sys {
   /**
    * Constant determining which platforms are valid to run the application.
    */
-  private validPlatforms: NodeJS.Platform[] = ["linux"];
+  private validPlatforms = VALID_PLATFORMS;
 
   /**
    * Checks if the given platform is a valid one to run the application.
